@@ -9,13 +9,24 @@ const endText = section.querySelector('h1');
 const controller = new ScrollMagic.Controller();
 
 //SCENES
-const scene = new ScrollMagic.Scene({
+let scene = new ScrollMagic.Scene({
   duration: 9000,       //Change based on content and need. Video duration is 9 seconds in this project
   triggerElement: intro,
   triggerHook: 0        //Position to finish some action (unpin, etc.), or start animation (trigger effect)
 })
 .addIndicators()
 .setPin(intro)
+.addTo(controller);
+
+//TEXT ANIMATION
+const textAnimation = TweenMax.fromTo(text, 3, {opacity: 1}, {opacity: 0})
+
+let scene2 = new ScrollMagic.Scene({
+  duration: 3000,
+  triggerElement: intro,
+  triggerHook: 0
+})
+.setTween(textAnimation)
 .addTo(controller);
 
 //VIDEO ANIMATION
