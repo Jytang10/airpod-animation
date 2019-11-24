@@ -8,6 +8,7 @@ const endText = section.querySelector('h1');
 //SCROLL MAGIC
 const controller = new ScrollMagic.Controller();
 
+//SCENES
 const scene = new ScrollMagic.Scene({
   duration: 9000,       //Change based on content and need. Video duration is 9 seconds in this project
   triggerElement: intro,
@@ -16,3 +17,18 @@ const scene = new ScrollMagic.Scene({
 .addIndicators()
 .setPin(intro)
 .addTo(controller);
+
+//VIDEO ANIMATION
+let accelamount = 0.1;   //Easing effect of scroll
+let scrollpos = 0;
+let delay = 0;          // Delay's job is to catch up to where we scrolled
+
+scene.on('update', e => {
+  scrollpos = e.scrollPos / 1000;
+})
+
+setInterval(() => {
+  delay += (scrollpos - delay) * accelamount;
+  // console.log(scrollpos, delay)
+  video.currentTime = delay;
+}, 33.3)
